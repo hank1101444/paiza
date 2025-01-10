@@ -1,4 +1,46 @@
-### 問題翻譯：
+```cpp
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <string>
+
+
+int main(){
+    int T;
+    while(cin >> T){
+        vector<string> g;
+        vector<int> w(T, 0), l(T, 0), p(T, 0), d(T, 0); 
+        for(int i =0;i < T;++i){
+            string s;
+            cin >> s;
+            g.push_back(s);
+        }
+        for(int i=0;i < T;++i){
+            for(int j=0;j < T;++j){
+                if(i == j) continue;
+                if(g[i][j] == 'W')w[i]++;
+                else if(g[i][j] == 'L')l[i]++;
+                else if(g[i][j] == 'P')p[i]++;
+                else d[i]++;   
+            }
+        }
+        for(int i=0; i< T;++i) p[i] = w[i] * 2 + d[i];
+        int mx = 0, mxi=0;
+        for(int i=0;i <T;++i){
+            if(p[i] > mx){
+                mx = p[i];
+                mxi = i;
+            }
+        }
+        cout << mxi + 1 << ' ' << p[mxi] << ' ' << w[mxi] << ' '<< d[mxi] << ' ' << l[mxi] << endl;
+
+
+    }
+    return 0;
+}
+```
+---
+Q：
 有一場比賽，其中 \( N \) 支隊伍參加。每支隊伍和其他隊伍進行對戰，結果記錄如下：
 - `W` 表示勝利（+2 分）。
 - `D` 表示平局（+1 分）。
@@ -88,46 +130,3 @@ LLDLLWLLL-W
 - **時間複雜度：** \( O(N^2) \)，遍歷比賽結果矩陣。
 - **空間複雜度：** \( O(N) \)，存儲每支隊伍的統計數據。
 
-```cpp
-#include <iostream>
-using namespace std;
-#include <vector>
-#include <string>
-
-
-int main(){
-    int T;
-    while(cin >> T){
-        vector<string> g;
-        vector<int> w(T, 0), l(T, 0), p(T, 0), d(T, 0); 
-        for(int i =0;i < T;++i){
-            string s;
-            cin >> s;
-            g.push_back(s);
-        }
-        for(int i=0;i < T;++i){
-            for(int j=0;j < T;++j){
-                if(i == j) continue;
-                if(g[i][j] == 'W')w[i]++;
-                else if(g[i][j] == 'L')l[i]++;
-                else if(g[i][j] == 'P')p[i]++;
-                else d[i]++;   
-            }
-        }
-        for(int i=0; i< T;++i) p[i] = w[i] * 2 + d[i];
-        int mx = 0, mxi=0;
-        for(int i=0;i <T;++i){
-            if(p[i] > mx){
-                mx = p[i];
-                mxi = i;
-            }
-        }
-        cout << mxi + 1 << ' ' << p[mxi] << ' ' << w[mxi] << ' '<< d[mxi] << ' ' << l[mxi] << endl;
-
-
-    }
-```
-
-
-    return 0;
-}
